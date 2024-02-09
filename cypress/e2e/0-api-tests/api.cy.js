@@ -132,7 +132,7 @@ describe('cypress: intercept api calls', () => {
     })
 
     //get request and and mock the response from json
-    it.only('intercept api call and mock the response', () => {  
+    it('intercept api call and mock the response', () => {  
 
       //intercept the call - kind of spy :)
       //mock response from fixture: 'mockUser.json'
