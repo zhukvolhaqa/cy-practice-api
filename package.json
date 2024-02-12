@@ -1,5 +1,17 @@
 {
   "devDependencies": {
     "cypress": "^13.6.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhukvolhaqa/cy-practice-api.git"
+  },
+  "scripts": { 
+    "cypress:run": "cypress run",
+    "cy:cloud_run": "npx cypress run --record --key 42cc32da-9d0f-4391-b13c-d6ebf82406ae",
+    "cy:cloud_parallel": "npx cypress run --record --key 42cc32da-9d0f-4391-b13c-d6ebf82406ae --parallel --ci-build-id 2",
+    "cy:run_in_chrome": "npm run cy:cloud_run -- --browser chrome",
+    "cy:run_in_firefox": "npm run cy:cloud_run -- --browser firefox",
+    "cy:cloud_multiple": "npm run cy:cloud_run -- --browser firefox --group Firefox --ci-build-id 123 & npm run cy:cloud_run -- --browser chrome --group Chrome --ci-build-id 123"
   }
 }

@@ -3,6 +3,9 @@
 
 //https://reqres.in/
 
+
+context('api tests with Cypress', () => {
+
 describe('cypress: api calls tests', () => {
   
     //get request and response checks
@@ -189,4 +192,6 @@ describe('cypress: intercept api calls', () => {
 
 })
  
+})
+
 })
