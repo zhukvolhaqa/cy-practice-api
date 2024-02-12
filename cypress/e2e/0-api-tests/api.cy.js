@@ -79,7 +79,7 @@ describe('cypress: api calls tests', () => {
 
 
       //post request and response checks
-      it('post: login requests with Bad Request', () => {
+      it('post: login requests with missing data', () => {
         // new user data
         const newUser = {
             email: 'eve.holt@reqres.in'
@@ -98,10 +98,8 @@ describe('cypress: api calls tests', () => {
             expect(response.status).to.equal(400) // 400 Bad Request
             expect(response.body.error).to.equal(errorMessage)                        
           }) 
-
           
-    }) 
-         
+    })          
 
 })
 
@@ -127,8 +125,7 @@ describe('cypress: intercept api calls', () => {
             expect(xhr.response.statusCode).to.equal(200)  //statusCode check
             expect(xhr.response.body.data.id).to.equal(2) //check id
             expect(xhr.response.body.data.email).to.equal('janet.weaver@reqres.in')         
-         })
-         //UI: Response form   //  cy.get('.response > pre')
+         })        
     })
 
     //get request and and mock the response from json
@@ -158,7 +155,38 @@ describe('cypress: intercept api calls', () => {
        })
        
   })
+
+
+  //get request and replace it
+  it.only('intercept api call and replace request', () => {  
   
+    const newUser = {
+      name: 'Olga',
+      job: 'QA Engineer'         
+    }
 
+    //intercept the call - kind of spy :)
+   cy.intercept('POST', 'https://reqres.in/api/users', (req) => {
+    req.body.name = newUser.name
+    req.body.job = newUser.job
+   }).as('createUser')
+   
+    //click Post button that do call Post users
+    cy.get('[data-id="post"]').click()
 
+    //listener, waiting for api call to be completed
+    cy.wait('@createUser').then( xhr => {
+        console.log(xhr)
+        expect(xhr.response.statusCode).to.equal(201)  //statusCode check   
+        expect(xhr.response.body.name).to.equal(newUser.name)
+        expect(xhr.response.body.job).to.equal(newUser.job)        
+     }) 
+
+     //UI check
+     cy.get('.response > pre')
+     .should('contain', newUser.name)
+     .and('contain', newUser.job)    
+
+})
+ 
 })
