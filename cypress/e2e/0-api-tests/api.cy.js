@@ -110,7 +110,7 @@ describe('cypress: intercept api calls', () => {
         cy.visit('https://reqres.in/')
       })
 
-    //get request and response checks
+    //intercept api call and do response checks
     it('intercept api call and check data', () => {  
 
         //intercept the call - kind of spy :)
@@ -128,7 +128,7 @@ describe('cypress: intercept api calls', () => {
          })        
     })
 
-    //get request and and mock the response from json
+    //intercept api call and mock the response from json 
     it('intercept api call and mock the response', () => {  
 
       //intercept the call - kind of spy :)
@@ -157,8 +157,8 @@ describe('cypress: intercept api calls', () => {
   })
 
 
-  //get request and replace it
-  it.only('intercept api call and replace request', () => {  
+  //intercept api call and replace the request with my data 
+  it('intercept api call and replace the request', () => {  
   
     const newUser = {
       name: 'Olga',
